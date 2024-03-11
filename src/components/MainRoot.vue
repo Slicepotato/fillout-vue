@@ -2,13 +2,7 @@
   <div>
     <h1>Form Responses</h1>
     <button @click="fetchResponses">Fetch Responses</button>
-    <div v-if="responses.length > 0">
-      <ul>
-        <li v-for="response in responses" :key="response.submissionId">
-          {{ response.submissionTime }} - {{ response.questions[0].value }}
-        </li>
-      </ul>
-    </div>
+    <pre>{{ responses }}</pre>
   </div>
 </template>
 
@@ -43,13 +37,14 @@ export default {
       }
     },
     async fetchFilteredResponses(formId, apiKey, filters) {
-      const url = `https://api.fillout.com/v1/forms/${formId}/responses`;
+      const url = `https://api.fillout.com/v1/api/forms/${formId}/submissions`;
       const headers = {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       };
 
-      const response = await axios.get(url, { headers, params: { filters: JSON.stringify(filters) } });
+      const response = await axios.get(url, { headers });
+      console.log(response.data);
 
       return response.data;
     },

@@ -1,14 +1,5 @@
 module.exports = {
     devServer: {
-        proxy: {
-            '/api': {
-                target: 'https://fillout.com',
-                ws: true,
-                changeOrigin: true,
-                pathRewrite: {
-                    '^/api': '',
-                },
-             }
-        },
-    },
+        proxy: 'http://localhost:3000'
+    }
 }
